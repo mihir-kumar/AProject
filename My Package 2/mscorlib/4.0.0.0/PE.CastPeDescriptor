@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>C:\CASTMS\Deploy\AProject\My Package 2\mscorlib\4.0.0.0\mscorlib.dll</comment>
+<entry key="cli.Assembly.0.version">4.0.0.0</entry>
+<entry key="cli.Assembly.0.culture"/>
+<entry key="cli.Version">v4.0.30319</entry>
+<entry key="cli.filename">mscorlib.dll</entry>
+<entry key="cli.Assembly.0.name">mscorlib.dll</entry>
+</properties>
