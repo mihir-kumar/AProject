@@ -1,0 +1,6 @@
+<div>
+Defines a source code version name for your snapshot and is displayed only in the CAST Engineering Dashboard. The snapshot will always be triggered on the current version defined in the CAST Management Studio. When triggering Snapshots for each Application in one go, the same source code version name is used for all snapshots.
+The tag [TODAY] can be used (replaced by today's date at runtime) or a date with the following format "MM/dd/yyyy HH:mm:ss".
+The tag [RESCAN_TYPE] is used (replaced by either "PROD" or "QA" at runtime) to differentiate between Production or Qa run in the proactive changes.
+Any tag available in the Jenkins Environment variables can also be used. They need to be between brackets. (examples: [BUILD_TAG], [BUILD_NUMBER], [BUILD_ID], [JOB_NAME],...)
+</div>

@@ -1,0 +1,103 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+
+	<f:section title="CAST Batch Web Service Connection Information" >
+		<f:entry title="Delivery Web Service Address" field="dmtWebServiceAddress">
+		    <f:textbox />
+		</f:entry>
+		<f:entry title="Analysis Web Service Address 1" field="cmsWebServiceAddress1">
+		   <f:textbox />
+		</f:entry>
+		<f:entry title="Analysis Web Service Address 2" field="cmsWebServiceAddress2">
+		   <f:textbox />
+		</f:entry>
+		<f:entry title="Analysis Web Service Address 3" field="cmsWebServiceAddress3">
+		   <f:textbox />
+		</f:entry>
+		<f:entry title="Analysis Web Service Address 4" field="cmsWebServiceAddress4">
+		   <f:textbox />
+		</f:entry>
+		<f:entry title="Analysis Web Service Address 5" field="cmsWebServiceAddress5">
+		   <f:textbox />
+		</f:entry>								
+		<f:validateButton
+		   title="Test Connection" progress="Testing..."
+		   method="testConnection" with="dmtWebServiceAddress,cmsWebServiceAddress1,cmsWebServiceAddress2,cmsWebServiceAddress3,cmsWebServiceAddress4,cmsWebServiceAddress5" />
+  	</f:section>
+  
+	<f:section title="Application Configuration Information" >
+		<f:entry title="Application Name" field="appName">
+		    <f:select />
+		</f:entry>
+		<f:entry title="Cast-MS Connection Profile" field="castMSConnectionProfile">
+			<f:select />
+		</f:entry>
+		<f:entry title="Delivery Reference Version" field="referenceName">
+		    <f:readOnlyTextbox value="${instance.getReferenceVersion()}" />
+		</f:entry>
+		<f:entry title="Version Name" field="versionName">
+		    <f:textbox default="Version [TODAY]"/>
+		</f:entry>
+		
+		<f:entry title="Schema Prefix" field="schemaPrefix" description="">
+			<f:textbox />
+		</f:entry>
+		<f:entry title="Measurement Schema Name" field="aadSchemaName">
+			<f:textbox />
+		</f:entry>
+		<f:entry title="Last Run Date" field="lastRunDate" >
+			<f:readOnlyTextbox value="${instance.getlastRunDate()}"/>
+		</f:entry>
+  	</f:section>
+
+ 	<f:section title="Housekeeping" >
+ 		<f:block>
+    		<f:optionalBlock field="backupBlock" title="Run Backup on CAST Application Database Set (1)" checked="${instance.backup}"/>    
+		</f:block>  
+		<f:block>
+    		<f:optionalBlock field="optimizeBlock" title="Run CAST Application Database Optimize after workflow is complete (7)" checked="${instance.optimize}"/>	  
+		</f:block>  
+		<f:block>
+    		<f:optionalBlock field="archiveBlock" title="Archive Delivery after successful analysis validation (8)" checked="${instance.archive}"/>	  
+		</f:block>  
+		<f:block>
+    		<f:optionalBlock field="aseBlock" title="Automatically Start Exceptions" checked="${instance.ase}"/>    
+		</f:block>  
+   	</f:section>
+
+ 	<f:section title="Analysis Workflow">
+		<f:entry field="aw" />
+		<f:entry  />
+		<f:block>
+    		<f:optionalBlock field="daBlock" title="Deliver Application (1)" checked="${instance.da}"/>    
+			<f:entry title="Use JNLP version of DMT?" field="useJnlp" description="Only select this option if delivery folder is not accessible by the web service module.">
+			  <f:checkbox/>
+			</f:entry>
+		</f:block>  
+		<f:block>
+    		<f:optionalBlock field="adBlock" title="Accept Delivery (2)" checked="${instance.ad}"/>    
+		</f:block>  
+		<f:block>
+    		<f:optionalBlock field="raBlock" title="Run Analysis (3)" checked="${instance.ra}"/>	  
+		</f:block>  
+		<f:block>
+    		<f:optionalBlock field="rsBlock" title="Run Snapshot (4)" checked="${instance.rs}"/>
+			<f:entry title="Snapshot Retention policy" field="retentionPolicy">
+				<f:select />
+			</f:entry>    			  
+		</f:block>  
+		<f:block>
+    		<f:optionalBlock field="ravBlock" title="Run Snapshot Validation (5)" checked="${instance.rav}"/>	  
+		</f:block>  
+		<f:block>
+    		<f:optionalBlock field="publishBlock" title="Publish Snapshot to AAD (6)" checked="${instance.publish}"/>	  
+		</f:block>  
+	    <f:entry name="workFlow" title="Stop the build in case of Errors:" field="workFlow">
+		  <select name="workFlow">
+	        <j:forEach var="type" items="Yes, No">
+			  <f:option selected="${type==instance.getWorkFlow()}" value="${type}">${type}</f:option>
+			</j:forEach>
+		  </select>
+	    </f:entry>
+   	</f:section>
+</j:jelly>
